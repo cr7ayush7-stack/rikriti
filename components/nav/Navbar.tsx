@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles, MessageCircle } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { buildWhatsAppLink, trackWhatsAppClick } from "@/lib/whatsapp";
 import { ANNOUNCEMENTS } from "@/lib/products";
 
@@ -13,6 +13,20 @@ const NAV_LINKS = [
   { label: "The Story", href: "/#story" },
   { label: "Reviews", href: "/#reviews" },
 ];
+
+/* ─── WhatsApp Logo SVG Component ─── */
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 32 32"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.502 1.128 6.746 3.048 9.378L1.05 31.328l6.156-1.968A15.906 15.906 0 0 0 16 32c8.826 0 16-7.174 16-16S24.826 0 16.004 0zm9.31 22.594c-.386 1.09-1.918 1.994-3.14 2.258-.836.178-1.928.32-5.604-1.204-4.702-1.948-7.73-6.726-7.966-7.036-.226-.31-1.9-2.53-1.9-4.826s1.166-3.416 1.636-3.896c.386-.394.836-.574 1.166-.574.13 0 .246.006.352.012.336.014.504.034.726.564.276.664.948 2.36 1.028 2.526.082.166.164.392.052.612-.106.226-.2.328-.366.518-.166.19-.324.336-.49.54-.152.176-.324.364-.132.696.192.324.854 1.408 1.83 2.276 1.258 1.12 2.28 1.478 2.646 1.63.272.112.598.086.798-.126.254-.274.566-.728.884-1.176.226-.322.512-.362.812-.248.306.106 1.928.91 2.258 1.076.33.166.548.246.628.386.078.14.078.798-.308 1.888z"
+    />
+  </svg>
+);
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -161,7 +175,7 @@ export default function Navbar() {
               </nav>
             </div>
 
-            {/* CENTER — Logo (BIGGER NOW) */}
+            {/* CENTER — Logo */}
             <Link
               href="/"
               className="
@@ -171,7 +185,7 @@ export default function Navbar() {
               aria-label="rikriti — Go to homepage"
               onClick={closeMobileMenu}
             >
-              {/* Mobile: Circle Logo (slightly bigger) */}
+              {/* Mobile: Circle Logo */}
               <div className="lg:hidden w-11 h-11 relative">
                 <Image
                   src="/images/rikriti-logo-circle.png"
@@ -183,7 +197,7 @@ export default function Navbar() {
                 />
               </div>
 
-              {/* Desktop: Text Logo — BIGGER + PROPER TRACKING */}
+              {/* Desktop: Text Logo */}
               <div className="hidden lg:flex flex-col items-center">
                 <span className="font-brand text-4xl xl:text-[42px] text-forest group-hover:text-sage transition-colors duration-300 tracking-wide leading-none">
                   rikriti
@@ -222,7 +236,7 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              {/* WhatsApp CTA */}
+              {/* WhatsApp CTA — Now with real WhatsApp logo */}
               <a
                 href={buildWhatsAppLink({ type: "general" })}
                 target="_blank"
@@ -230,25 +244,22 @@ export default function Navbar() {
                 onClick={handleWhatsAppClick}
                 className="
                   flex items-center gap-2
-                  bg-forest text-cream
+                  bg-[#25D366] hover:bg-[#20BA5A]
+                  text-white
                   px-4 py-2.5 lg:px-5 lg:py-3
                   rounded-full
                   text-[10px] lg:text-[11px] 
                   font-body font-semibold 
                   tracking-[0.15em] uppercase
-                  hover:bg-sage 
                   transition-all duration-300
                   shadow-sm hover:shadow-md
                   hover:scale-[1.02] active:scale-[0.98]
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2
                   min-h-[44px]
                 "
                 aria-label="Order via WhatsApp"
               >
-                <MessageCircle
-                  className="w-3.5 h-3.5 lg:w-4 lg:h-4"
-                  aria-hidden="true"
-                />
+                <WhatsAppIcon className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
                 <span className="hidden sm:inline">Order Now</span>
               </a>
             </div>
@@ -320,6 +331,7 @@ export default function Navbar() {
                   </motion.div>
                 ))}
 
+                {/* Mobile drawer WhatsApp CTA */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -337,15 +349,16 @@ export default function Navbar() {
                     className="
                       flex items-center justify-center gap-2
                       w-full
-                      bg-forest text-cream
+                      bg-[#25D366] hover:bg-[#20BA5A]
+                      text-white
                       px-6 py-4 rounded-full
                       text-xs font-body font-semibold 
                       tracking-widest uppercase
-                      hover:bg-sage transition-all duration-300
+                      transition-all duration-300
                       shadow-sm min-h-[48px]
                     "
                   >
-                    <MessageCircle className="w-4 h-4" aria-hidden="true" />
+                    <WhatsAppIcon className="w-4 h-4" />
                     Order via WhatsApp
                   </a>
                 </motion.div>

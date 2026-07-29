@@ -8,23 +8,17 @@ import {
   Home,
   Sparkles,
   BookOpen,
-  MessageCircle,
   ShoppingBag,
 } from "lucide-react";
 import { buildWhatsAppLink, trackWhatsAppClick } from "@/lib/whatsapp";
 
 /* ═══════════════════════════════════════════════════════════
-   MOBILE BOTTOM NAV — Enhanced Liquid Glass Floating Bar
-   
-   Fixed bottom on mobile (< lg breakpoint)
-   Auto-hides on scroll down, shows on scroll up
-   Context-aware navigation (Home on collections page = go back)
-   Story button scrolls to story section on homepage
+   MOBILE BOTTOM NAV — Liquid Glass with WhatsApp Logo
    ═══════════════════════════════════════════════════════════ */
 
 interface NavItem {
   label: string;
-  icon: React.ElementType;
+  icon: React.ElementType | "whatsapp"; // Special "whatsapp" for real logo
   type: "scroll-top" | "link" | "scroll-anchor" | "whatsapp" | "custom-whatsapp";
   href?: string;
   anchor?: string;
@@ -57,10 +51,24 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Chat",
-    icon: MessageCircle,
+    icon: "whatsapp", // Special flag for WhatsApp logo
     type: "whatsapp",
   },
 ];
+
+/* ─── WhatsApp Logo SVG Component ─── */
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 32 32"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      d="M16.004 0h-.008C7.174 0 .002 7.174.002 16c0 3.502 1.128 6.746 3.048 9.378L1.05 31.328l6.156-1.968A15.906 15.906 0 0 0 16 32c8.826 0 16-7.174 16-16S24.826 0 16.004 0zm9.31 22.594c-.386 1.09-1.918 1.994-3.14 2.258-.836.178-1.928.32-5.604-1.204-4.702-1.948-7.73-6.726-7.966-7.036-.226-.31-1.9-2.53-1.9-4.826s1.166-3.416 1.636-3.896c.386-.394.836-.574 1.166-.574.13 0 .246.006.352.012.336.014.504.034.726.564.276.664.948 2.36 1.028 2.526.082.166.164.392.052.612-.106.226-.2.328-.366.518-.166.19-.324.336-.49.54-.152.176-.324.364-.132.696.192.324.854 1.408 1.83 2.276 1.258 1.12 2.28 1.478 2.646 1.63.272.112.598.086.798-.126.254-.274.566-.728.884-1.176.226-.322.512-.362.812-.248.306.106 1.928.91 2.258 1.076.33.166.548.246.628.386.078.14.078.798-.308 1.888z"
+    />
+  </svg>
+);
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
@@ -68,7 +76,6 @@ export default function MobileBottomNav() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeLabel, setActiveLabel] = useState("Home");
 
-  /* ── Set active tab based on page + scroll position ── */
   useEffect(() => {
     if (pathname === "/collections") {
       setActiveLabel("Shop");
@@ -77,7 +84,6 @@ export default function MobileBottomNav() {
     }
   }, [pathname]);
 
-  /* ── Hide on scroll down, show on scroll up ── */
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -92,12 +98,10 @@ export default function MobileBottomNav() {
 
       setLastScrollY(currentScrollY);
 
-      // Update active tab based on scroll position (homepage only)
       if (pathname === "/") {
         const storySection = document.getElementById("story");
         if (storySection) {
           const rect = storySection.getBoundingClientRect();
-          // Story is "active" when it's in the middle of viewport
           if (rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2) {
             setActiveLabel("Story");
           } else if (rect.top > window.innerHeight / 2) {
@@ -111,17 +115,14 @@ export default function MobileBottomNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, pathname]);
 
-  /* ── Handle Home click — scroll to top or navigate ── */
   const handleHomeClick = useCallback((e: React.MouseEvent) => {
     if (pathname === "/") {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveLabel("Home");
     }
-    // If on another page, let the link navigate normally
   }, [pathname]);
 
-  /* ── Handle Story click — smart anchor scroll ── */
   const handleStoryClick = useCallback((e: React.MouseEvent) => {
     if (pathname === "/") {
       e.preventDefault();
@@ -131,7 +132,6 @@ export default function MobileBottomNav() {
         setActiveLabel("Story");
       }
     }
-    // If on another page, let the link navigate to /#story
   }, [pathname]);
 
   const handleItemClick = (item: NavItem) => {
@@ -160,13 +160,13 @@ export default function MobileBottomNav() {
           aria-label="Mobile navigation"
           role="navigation"
         >
-          {/* Backdrop fade — soft gradient at top for depth */}
+          {/* Backdrop fade */}
           <div
             aria-hidden="true"
             className="absolute inset-x-0 -top-16 h-16 bg-gradient-to-t from-cream/60 to-transparent pointer-events-none"
           />
 
-          {/* Nav container with ENHANCED LIQUID GLASS */}
+          {/* Nav container with liquid glass */}
           <div className="relative px-4 pb-4 pt-2">
             <div
               className="
@@ -185,13 +185,50 @@ export default function MobileBottomNav() {
               "
             >
               {NAV_ITEMS.map((item) => {
-                const Icon = item.icon;
                 const isActive = activeLabel === item.label;
                 const isWhatsApp =
                   item.type === "whatsapp" || item.type === "custom-whatsapp";
+                const isChatButton = item.label === "Chat";
 
-                /* ── WhatsApp Items ── */
+                /* ── Chat WhatsApp Item — Special styling with real WhatsApp logo ── */
+                if (isChatButton) {
+                  return (
+                    <a
+                      key={item.label}
+                      href={buildWhatsAppLink({ type: "general" })}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleItemClick(item)}
+                      className="
+                        relative flex flex-col items-center justify-center
+                        min-w-[56px] min-h-[56px]
+                        px-3 py-2 rounded-full
+                        transition-all duration-300
+                        active:scale-95
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest
+                        text-[#25D366] hover:text-[#20BA5A]
+                      "
+                      aria-label={item.label}
+                    >
+                      {/* WhatsApp logo with subtle glow */}
+                      <div className="relative">
+                        {/* Subtle glow behind */}
+                        <span
+                          className="absolute inset-0 rounded-full bg-[#25D366]/30 blur-md animate-pulse-slow"
+                          aria-hidden="true"
+                        />
+                        <WhatsAppIcon className="relative z-10 w-5 h-5" />
+                      </div>
+                      <span className="text-[9px] font-body font-semibold tracking-wider uppercase mt-1 relative z-10">
+                        {item.label}
+                      </span>
+                    </a>
+                  );
+                }
+
+                /* ── Custom WhatsApp Item — Same style as other nav items ── */
                 if (isWhatsApp) {
+                  const Icon = item.icon as React.ElementType;
                   return (
                     <a
                       key={item.label}
@@ -201,7 +238,7 @@ export default function MobileBottomNav() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleItemClick(item)}
-                      className={`
+                      className="
                         relative flex flex-col items-center justify-center
                         min-w-[56px] min-h-[56px]
                         px-3 py-2 rounded-full
@@ -209,13 +246,11 @@ export default function MobileBottomNav() {
                         active:scale-95
                         focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest
                         text-cream/70 hover:text-cream
-                      `}
+                      "
                       aria-label={item.label}
                     >
                       <Icon
-                        className={`w-5 h-5 relative z-10 ${
-                          item.label === "Chat" ? "animate-pulse-slow" : ""
-                        }`}
+                        className="w-5 h-5 relative z-10"
                         aria-hidden="true"
                         strokeWidth={2}
                       />
@@ -226,8 +261,9 @@ export default function MobileBottomNav() {
                   );
                 }
 
-                /* ── Home Button (special scroll-top behavior) ── */
+                /* ── Home Button ── */
                 if (item.type === "scroll-top") {
+                  const Icon = item.icon as React.ElementType;
                   return (
                     <Link
                       key={item.label}
@@ -273,8 +309,9 @@ export default function MobileBottomNav() {
                   );
                 }
 
-                /* ── Story Button (anchor scroll) ── */
+                /* ── Story Button ── */
                 if (item.type === "scroll-anchor") {
+                  const Icon = item.icon as React.ElementType;
                   return (
                     <Link
                       key={item.label}
@@ -320,7 +357,8 @@ export default function MobileBottomNav() {
                   );
                 }
 
-                /* ── Regular Link (Shop → /collections) ── */
+                /* ── Shop Link ── */
+                const Icon = item.icon as React.ElementType;
                 return (
                   <Link
                     key={item.label}

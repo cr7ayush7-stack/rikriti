@@ -17,8 +17,7 @@
 export type ProductCategory =
   | "bouquets"
   | "accessories"
-  | "wearables"
-  | "gifting";
+  | "wearables";
 
 export interface Product {
   id: string;
@@ -48,9 +47,8 @@ export interface Category {
 export const CATEGORIES: Category[] = [
   { slug: "all", label: "All Pieces" },
   { slug: "bouquets", label: "Bouquets" },
-  { slug: "accessories", label: "Hair Accessories" },
+  { slug: "accessories", label: "Accessories" },
   { slug: "wearables", label: "Wearables" },
-  { slug: "gifting", label: "Gifting Sets" },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -74,9 +72,9 @@ export const HOT_DROPS: HotDrop[] = [
     title: "Everlasting Bouquets",
     subtitle: "Blooms that never wither",
     description:
-      "Sunflowers, tulips, roses, lavender. Handcrafted floral arrangements that last forever.",
-    imageUrl: "URL_HERE_HOTDROP_BOUQUETS",
-    imageAlt: "Handcrafted crochet bouquet collection",
+      "Handcrafted crochet flowers — lilies, tulips, roses. Wrapped and gifted, made to last a lifetime.",
+    imageUrl: "/images/product-bouquet-lily-indoor.jpg",
+    imageAlt: "Handcrafted crochet lily bouquet wrapped in turquoise tissue",
     category: "bouquets",
     rotation: "-3deg",
   },
@@ -85,20 +83,20 @@ export const HOT_DROPS: HotDrop[] = [
     title: "Indo-Western Wearables",
     subtitle: "Softness you can wear",
     description:
-      "Scarves, tote bags, shrugs. Delicate crochet pieces for your everyday elegance.",
-    imageUrl: "URL_HERE_HOTDROP_WEARABLES",
-    imageAlt: "Crochet scarves and wearable accessories",
+      "Chunky knit bags, delicate accessories. Handmade pieces that add warmth to your everyday.",
+    imageUrl: "/images/product-bag-shoulder-yellow.jpg",
+    imageAlt: "Pastel butter yellow crochet shoulder bag lifestyle shot",
     category: "wearables",
     rotation: "0deg",
   },
   {
     number: "03",
     title: "Hair Aesthetics",
-    subtitle: "Floral crowns for every day",
+    subtitle: "Adornments for every occasion",
     description:
-      "Clips, scrunchies, headbands. Little details that make you feel like a garden goddess.",
-    imageUrl: "URL_HERE_HOTDROP_HAIR",
-    imageAlt: "Crochet hair accessories and floral clips",
+      "Traditional mogra gajras, floral clips, and hair accessories. Timeless pieces for special moments.",
+    imageUrl: "/images/product-gajra-mogra.jpg",
+    imageAlt: "Handcrafted white mogra jasmine crochet gajra hair garland",
     category: "accessories",
     rotation: "4deg",
   },
@@ -111,166 +109,103 @@ export const HOT_DROPS: HotDrop[] = [
 export const PRODUCTS: Product[] = [
   /* ── BOUQUETS ── */
   {
-    id: "bouquet-sunflower",
-    name: "Sunflower Sunshine Bouquet",
-    category: "bouquets",
-    price: 1499,
-    description:
-      "A cheerful bouquet of hand-crocheted sunflowers with delicate green foliage. Perfect for birthdays and just-because moments.",
-    imageUrl: "URL_HERE_PRODUCT_SUNFLOWER_BOUQUET",
-    imageAlt: "Handcrafted crochet sunflower bouquet with green leaves",
-    featured: true,
-    bestSeller: true,
-    craftDays: 7,
-    colors: ["Sunshine Yellow", "Meadow Green"],
-  },
-  {
-    id: "bouquet-tulip",
+    id: "bouquet-tulip-cluster",
     name: "Pastel Tulip Cluster",
     category: "bouquets",
     price: 1299,
     description:
-      "Soft pastel tulips gathered into a romantic bouquet. Comes wrapped in kraft paper with a handwritten note.",
-    imageUrl: "URL_HERE_PRODUCT_TULIP_BOUQUET",
-    imageAlt: "Pastel crochet tulips wrapped in kraft paper",
+      "Cream tulips with delicate pink accents, wrapped in vibrant magenta tissue and finished with a satin bow. A romantic bouquet for every occasion.",
+    imageUrl: "/images/product-bouquet-tulip-yellow.jpg",
+    imageAlt: "Handcrafted crochet cream tulips wrapped in magenta tissue paper against yellow background",
+    featured: true,
+    bestSeller: true,
     isNew: true,
     craftDays: 6,
-    colors: ["Blush Pink", "Butter Yellow", "Lavender"],
+    colors: ["Cream", "Pastel Pink", "Sage"],
   },
   {
-    id: "bouquet-rose",
-    name: "Vintage Rose Bundle",
+    id: "bouquet-lily-classic",
+    name: "Classic Lily Bloom",
     category: "bouquets",
     price: 1699,
     description:
-      "Deep burgundy and blush roses with intricate petal work. A timeless piece for anniversaries and heirlooms.",
-    imageUrl: "URL_HERE_PRODUCT_ROSE_BOUQUET",
-    imageAlt: "Vintage crochet rose bundle in burgundy and blush",
+      "Two elegant lily blooms with yellow crocheted stamens and detailed petal work. Timeless florals that celebrate quiet beauty.",
+    imageUrl: "/images/product-bouquet-lily-terracotta.jpg",
+    imageAlt: "Handcrafted crochet white lily bouquet against warm terracotta background",
     featured: true,
-    craftDays: 10,
-    colors: ["Burgundy", "Dusty Rose", "Sage"],
-  },
-  {
-    id: "bouquet-lavender",
-    name: "Provence Lavender Stems",
-    category: "bouquets",
-    price: 899,
-    description:
-      "Slim lavender stems tied with jute twine. A minimalist bouquet that whispers rather than shouts.",
-    imageUrl: "URL_HERE_PRODUCT_LAVENDER_BOUQUET",
-    imageAlt: "Minimalist crochet lavender stems tied with jute",
-    craftDays: 5,
-    colors: ["Soft Purple", "Sage"],
+    craftDays: 8,
+    colors: ["Cream White", "Butter Yellow", "Sage Green"],
   },
 
-  /* ── HAIR ACCESSORIES ── */
+  /* ── HAIR ACCESSORIES / KEYCHAINS ── */
   {
-    id: "hair-daisy-clip",
-    name: "Daisy Meadow Clip",
-    category: "accessories",
-    price: 299,
-    description:
-      "A set of two daisy hair clips. Sweet, simple, and perfect for a cottagecore aesthetic.",
-    imageUrl: "URL_HERE_PRODUCT_DAISY_CLIP",
-    imageAlt: "Crochet daisy hair clips set of two",
-    bestSeller: true,
-    craftDays: 3,
-    colors: ["White & Yellow"],
-  },
-  {
-    id: "hair-rose-scrunchie",
-    name: "Rose Garden Scrunchie",
-    category: "accessories",
-    price: 399,
-    description:
-      "A soft scrunchie with a delicate crochet rose. Comfortable, elegant, and endlessly Instagrammable.",
-    imageUrl: "URL_HERE_PRODUCT_ROSE_SCRUNCHIE",
-    imageAlt: "Crochet rose scrunchie in blush pink",
-    isNew: true,
-    craftDays: 4,
-    colors: ["Blush", "Sage", "Ivory"],
-  },
-  {
-    id: "hair-floral-headband",
-    name: "Floral Crown Headband",
+    id: "keychain-octopus-pair",
+    name: "Bestie Octopus Duo",
     category: "accessories",
     price: 599,
     description:
-      "A headband adorned with tiny crochet flowers. Feel like a woodland fairy every single day.",
-    imageUrl: "URL_HERE_PRODUCT_FLORAL_HEADBAND",
-    imageAlt: "Floral crown crochet headband with tiny flowers",
+      "A pair of pastel octopus keychains — pink and lavender — with sweet embroidered faces and dangling tentacles. Perfect for matching with your bestie.",
+    imageUrl: "/images/product-keychain-octopus-pair.jpg",
+    imageAlt: "Pair of pastel pink and purple crochet octopus keychains with gold rings",
+    bestSeller: true,
+    isNew: true,
+    craftDays: 4,
+    colors: ["Pastel Pink", "Lavender Purple"],
+  },
+  {
+    id: "keychain-dachshund",
+    name: "Dachshund Charm",
+    category: "accessories",
+    price: 449,
+    description:
+      "A cute chocolate brown dachshund keychain with floppy ears, tiny scarf, and a curled tail. Because your keys deserve personality too.",
+    imageUrl: "/images/product-keychain-dachshund.jpg",
+    imageAlt: "Handcrafted dark chocolate brown crochet dachshund keychain with white scarf",
+    isNew: true,
+    craftDays: 3,
+    colors: ["Chocolate Brown", "Cream"],
+  },
+  {
+    id: "keychain-cat-plush",
+    name: "Kitty Amigurumi Keychain",
+    category: "accessories",
+    price: 399,
+    description:
+      "A tiny cream kitty with rosy cheeks, embroidered whiskers, and little paws. Small enough for your keys, cute enough for your heart.",
+    imageUrl: "/images/product-keychain-cat.jpg",
+    imageAlt: "Handcrafted cream white crochet cat keychain with embroidered face",
+    bestSeller: true,
+    craftDays: 3,
+    colors: ["Cream White", "Pink Accent"],
+  },
+  {
+    id: "gajra-mogra",
+    name: "Mogra Gajra",
+    category: "accessories",
+    price: 899,
+    description:
+      "Traditional Indian jasmine hair garland recreated in delicate crochet. Perfect for weddings, festive occasions, and cultural celebrations.",
+    imageUrl: "/images/product-gajra-mogra.jpg",
+    imageAlt: "Handcrafted white mogra jasmine crochet gajra hair garland",
+    featured: true,
     craftDays: 5,
-    colors: ["Mixed Pastels"],
+    colors: ["Cream White", "Green Base"],
   },
 
   /* ── WEARABLES ── */
   {
-    id: "wearable-scarf",
-    name: "Botanical Lace Scarf",
-    category: "wearables",
-    price: 1899,
-    description:
-      "A lightweight scarf with botanical lace patterns. Drapes beautifully over any outfit.",
-    imageUrl: "URL_HERE_PRODUCT_LACE_SCARF",
-    imageAlt: "Botanical crochet lace scarf in sage green",
-    featured: true,
-    craftDays: 12,
-    colors: ["Sage", "Cream", "Dusty Rose"],
-  },
-  {
-    id: "wearable-tote",
-    name: "Meadow Tote Bag",
-    category: "wearables",
-    price: 1599,
-    description:
-      "A sturdy crochet tote with floral appliqué. Carry your world in something beautiful.",
-    imageUrl: "URL_HERE_PRODUCT_TOTE_BAG",
-    imageAlt: "Crochet tote bag with floral appliqué",
-    bestSeller: true,
-    craftDays: 8,
-    colors: ["Natural", "Sage"],
-  },
-  {
-    id: "wearable-shrug",
-    name: "Whisper Shrug",
+    id: "bag-butter-yellow",
+    name: "Butter Yellow Shoulder Bag",
     category: "wearables",
     price: 2299,
     description:
-      "A delicate open-front shrug for layered elegance. Perfect over a simple dress or kurta.",
-    imageUrl: "URL_HERE_PRODUCT_SHRUG",
-    imageAlt: "Delicate crochet whisper shrug in ivory",
-    isNew: true,
-    craftDays: 14,
-    colors: ["Ivory", "Sage", "Dusty Rose"],
-  },
-
-  /* ── GIFTING SETS ── */
-  {
-    id: "gift-bloom-box",
-    name: "The Bloom Gift Box",
-    category: "gifting",
-    price: 2499,
-    description:
-      "A curated box with a mini bouquet, matching hair clip, and handwritten note. Gift-ready packaging.",
-    imageUrl: "URL_HERE_PRODUCT_BLOOM_BOX",
-    imageAlt: "Curated gift box with bouquet, hair clip, and note",
+      "Chunky pastel butter yellow shoulder bag with thick woven basket weave. Structured, sturdy, and beautifully everyday.",
+    imageUrl: "/images/product-bag-shoulder-yellow.jpg",
+    imageAlt: "Pastel butter yellow crochet shoulder bag styled with white pinstripe shirt",
     featured: true,
     bestSeller: true,
     craftDays: 10,
-    colors: ["Customizable"],
-  },
-  {
-    id: "gift-love-note",
-    name: "The Love Note Set",
-    category: "gifting",
-    price: 1799,
-    description:
-      "A pocket-sized bouquet paired with a heartfelt crochet card. For the ones who mean the most.",
-    imageUrl: "URL_HERE_PRODUCT_LOVE_NOTE",
-    imageAlt: "Pocket bouquet with crochet love note card",
-    isNew: true,
-    craftDays: 7,
-    colors: ["Blush", "Ivory"],
+    colors: ["Pastel Butter Yellow"],
   },
 ];
 

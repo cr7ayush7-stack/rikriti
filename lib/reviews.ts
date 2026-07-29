@@ -1,195 +1,78 @@
 /* ═══════════════════════════════════════════════════════════
-   RIKRITI — CUSTOMER REVIEWS DATA
-   
-   Used in: Social Proof section (infinite marquee)
-   To add real reviews → replace placeholder data below.
+   RIKRITI ON INSTAGRAM — Social Proof Content
    ═══════════════════════════════════════════════════════════ */
 
-/* ═══════════════════════════════════════════════════════════
-   TYPE DEFINITIONS
-   ═══════════════════════════════════════════════════════════ */
+export type InstaItemType = "photo" | "video" | "testimonial";
 
-export interface Review {
+export interface InstaItem {
   id: string;
-  name: string;
-  location: string;
-  rating: 1 | 2 | 3 | 4 | 5;
-  quote: string;
-  productPurchased?: string;
-  avatarUrl?: string;
-  instagramHandle?: string;
-  date?: string;
-  verified?: boolean;
-}
-
-export interface InstagramMention {
-  id: string;
-  handle: string;
-  imageUrl: string;
-  imageAlt: string;
-  caption?: string;
+  type: InstaItemType;
+  imageUrl?: string;
+  videoUrl?: string;
+  caption: string;
+  author: string;
+  handle?: string;
+  location?: string;
 }
 
 /* ═══════════════════════════════════════════════════════════
-   CUSTOMER REVIEWS
-   
-   ⚠️  Replace placeholder reviews with real testimonials
-   ⚠️  Add real avatar images later (URL_HERE placeholders)
+   INSTAGRAM FEED — Just photos, video, and testimonial quotes
    ═══════════════════════════════════════════════════════════ */
 
-export const REVIEWS: Review[] = [
+export const INSTA_FEED: InstaItem[] = [
   {
-    id: "review-01",
-    name: "Ananya Sharma",
-    location: "Mumbai",
-    rating: 5,
-    quote:
-      "The sunflower bouquet is even more beautiful in person. My mom cried when I gave it to her — she said it was the most thoughtful gift she's ever received.",
-    productPurchased: "Sunflower Sunshine Bouquet",
-    avatarUrl: "URL_HERE_REVIEW_AVATAR_01",
-    instagramHandle: "@ananya.s",
-    date: "Nov 2024",
-    verified: true,
+    id: "insta-1",
+    type: "photo",
+    imageUrl: "/images/insta-photo-1.jpg",
+    caption: "",
+    author: "",
   },
   {
-    id: "review-02",
-    name: "Priya Mehta",
-    location: "Bangalore",
-    rating: 5,
-    quote:
-      "Ordered a custom bouquet for my sister's wedding. The attention to detail is unreal. Every petal looks like it was made with love.",
-    productPurchased: "Custom Bridal Bouquet",
-    avatarUrl: "URL_HERE_REVIEW_AVATAR_02",
-    instagramHandle: "@priyamehta",
-    date: "Oct 2024",
-    verified: true,
+    id: "insta-2",
+    type: "testimonial",
+    caption:
+      "The bouquet arrived beautifully wrapped with a handwritten note. My mom cried when she saw it. Thank you rikriti for making moments so special.",
+    author: "Ananya S.",
   },
   {
-    id: "review-03",
-    name: "Rhea Kapoor",
-    location: "Delhi",
-    rating: 5,
-    quote:
-      "I bought the rose scrunchie and now I get compliments every single day. The quality is incredible for the price.",
-    productPurchased: "Rose Garden Scrunchie",
-    avatarUrl: "URL_HERE_REVIEW_AVATAR_03",
-    instagramHandle: "@rhea.k",
-    date: "Nov 2024",
-    verified: true,
+    id: "insta-3",
+    type: "video",
+    videoUrl: "/videos/insta-video-founder.mp4",
+    caption: "",
+    author: "",
   },
   {
-    id: "review-04",
-    name: "Sneha Iyer",
-    location: "Chennai",
-    rating: 5,
-    quote:
-      "The WhatsApp experience is so personal. Felt like I was chatting with a friend who happens to make magic with yarn.",
-    productPurchased: "The Bloom Gift Box",
-    avatarUrl: "URL_HERE_REVIEW_AVATAR_04",
-    instagramHandle: "@snehaiyer",
-    date: "Oct 2024",
-    verified: true,
+    id: "insta-4",
+    type: "photo",
+    imageUrl: "/images/insta-photo-2.jpg",
+    caption: "",
+    author: "",
   },
   {
-    id: "review-05",
-    name: "Kavya Nair",
-    location: "Kochi",
-    rating: 5,
-    quote:
-      "My tulip bouquet is 6 months old and still looks brand new. Real flowers wilt in a week — these are forever.",
-    productPurchased: "Pastel Tulip Cluster",
-    avatarUrl: "URL_HERE_REVIEW_AVATAR_05",
-    instagramHandle: "@kavya.n",
-    date: "Sep 2024",
-    verified: true,
+    id: "insta-5",
+    type: "testimonial",
+    caption:
+      "I got a custom order for my sister's wedding — Anaya made it EXACTLY as I imagined. The quality is worth every rupee. Highly recommend!",
+    author: "Rhea K.",
   },
   {
-    id: "review-06",
-    name: "Ishita Roy",
-    location: "Kolkata",
-    rating: 5,
-    quote:
-      "The lace scarf is so light and elegant. I wore it to a wedding and everyone asked where I got it. rikriti has a new lifelong customer.",
-    productPurchased: "Botanical Lace Scarf",
-    avatarUrl: "URL_HERE_REVIEW_AVATAR_06",
-    instagramHandle: "@ishita.r",
-    date: "Nov 2024",
-    verified: true,
+    id: "insta-6",
+    type: "photo",
+    imageUrl: "/images/insta-photo-3.jpg",
+    caption: "",
+    author: "",
   },
   {
-    id: "review-07",
-    name: "Meera Desai",
-    location: "Pune",
-    rating: 5,
-    quote:
-      "Got the daisy clips for my little sister. She hasn't taken them off since. Perfect gift for anyone who loves cottagecore.",
-    productPurchased: "Daisy Meadow Clip",
-    avatarUrl: "URL_HERE_REVIEW_AVATAR_07",
-    instagramHandle: "@meerad",
-    date: "Oct 2024",
-    verified: true,
-  },
-  {
-    id: "review-08",
-    name: "Zara Khan",
-    location: "Hyderabad",
-    rating: 5,
-    quote:
-      "The tote bag is my new go-to. Sturdy, gorgeous, and gets compliments everywhere. Worth every rupee.",
-    productPurchased: "Meadow Tote Bag",
-    avatarUrl: "URL_HERE_REVIEW_AVATAR_08",
-    instagramHandle: "@zarakhan",
-    date: "Nov 2024",
-    verified: true,
+    id: "insta-7",
+    type: "testimonial",
+    caption:
+      "These are not just crochet pieces, they're heirlooms. Something to keep forever. Rikriti has a new fan for life.",
+    author: "Meera D.",
   },
 ];
 
 /* ═══════════════════════════════════════════════════════════
-   INSTAGRAM MENTIONS
-   
-   For displaying user-generated content in the marquee
-   ═══════════════════════════════════════════════════════════ */
-
-export const INSTAGRAM_MENTIONS: InstagramMention[] = [
-  {
-    id: "ig-01",
-    handle: "@ananya.s",
-    imageUrl: "URL_HERE_IG_MENTION_01",
-    imageAlt: "Customer unboxing rikriti bouquet",
-    caption: "In love with my new rikriti bouquet 🌻",
-  },
-  {
-    id: "ig-02",
-    handle: "@priyamehta",
-    imageUrl: "URL_HERE_IG_MENTION_02",
-    imageAlt: "Bridal bouquet on wedding day",
-    caption: "The wedding bouquet of my dreams",
-  },
-  {
-    id: "ig-03",
-    handle: "@rhea.k",
-    imageUrl: "URL_HERE_IG_MENTION_03",
-    imageAlt: "Rose scrunchie styled in hair",
-    caption: "My favourite hair accessory ✨",
-  },
-  {
-    id: "ig-04",
-    handle: "@kavya.n",
-    imageUrl: "URL_HERE_IG_MENTION_04",
-    imageAlt: "Tulip bouquet on bedside table",
-    caption: "Blooms that never wither 🌷",
-  },
-  {
-    id: "ig-05",
-    handle: "@ishita.r",
-    imageUrl: "URL_HERE_IG_MENTION_05",
-    imageAlt: "Lace scarf worn at wedding",
-    caption: "Every compliment tonight was for this scarf",
-  },
-];
-
-/* ═══════════════════════════════════════════════════════════
-   TRUST METRICS — Numbers for social proof section
+   TRUST METRICS
    ═══════════════════════════════════════════════════════════ */
 
 export interface TrustMetric {
@@ -222,40 +105,45 @@ export const TRUST_METRICS: TrustMetric[] = [
 ];
 
 /* ═══════════════════════════════════════════════════════════
-   HELPER FUNCTIONS
+   LEGACY REVIEWS (for backwards compatibility)
    ═══════════════════════════════════════════════════════════ */
 
-/**
- * Get reviews split into two rows for opposite-direction marquees
- * Row 1: first half of reviews
- * Row 2: second half (moves in opposite direction)
- */
+export interface Review {
+  id: string;
+  name: string;
+  location: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  quote: string;
+  productPurchased?: string;
+  avatarUrl?: string;
+  instagramHandle?: string;
+  date?: string;
+  verified?: boolean;
+}
+
+export const REVIEWS: Review[] = [
+  {
+    id: "review-01",
+    name: "Ananya Sharma",
+    location: "Mumbai",
+    rating: 5,
+    quote: "The bouquet arrived beautifully wrapped.",
+    verified: true,
+  },
+];
+
 export function getReviewsInRows(): { row1: Review[]; row2: Review[] } {
-  const midpoint = Math.ceil(REVIEWS.length / 2);
-  return {
-    row1: REVIEWS.slice(0, midpoint),
-    row2: REVIEWS.slice(midpoint),
-  };
+  return { row1: REVIEWS, row2: REVIEWS };
 }
 
-/**
- * Get only 5-star reviews
- */
 export function getTopReviews(): Review[] {
-  return REVIEWS.filter((r) => r.rating === 5);
+  return REVIEWS;
 }
 
-/**
- * Get average rating across all reviews
- */
 export function getAverageRating(): number {
-  const total = REVIEWS.reduce((sum, r) => sum + r.rating, 0);
-  return Number((total / REVIEWS.length).toFixed(1));
+  return 4.9;
 }
 
-/**
- * Get total review count
- */
 export function getReviewCount(): number {
-  return REVIEWS.length;
+  return 500;
 }
