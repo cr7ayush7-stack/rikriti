@@ -320,21 +320,21 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Legal links */}
+                    {/* Legal links */}
           <ul className="flex flex-wrap gap-6 text-[11px] font-body text-forest/50">
             <li>
-              <Link href="#" className="hover:text-forest transition-colors">
-                Privacy Policy
+              <Link href="/policies" className="hover:text-forest transition-colors">
+                Shop Policies
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-forest transition-colors">
-                Terms of Service
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:text-forest transition-colors">
+              <Link href="/policies#shipping" className="hover:text-forest transition-colors">
                 Shipping
+              </Link>
+            </li>
+            <li>
+              <Link href="/policies#no-cancellation" className="hover:text-forest transition-colors">
+                Cancellations
               </Link>
             </li>
           </ul>

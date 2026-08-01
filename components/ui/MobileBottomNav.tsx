@@ -6,24 +6,21 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
-  Sparkles,
   BookOpen,
   ShoppingBag,
+  FileText,
 } from "lucide-react";
 import { buildWhatsAppLink, trackWhatsAppClick } from "@/lib/whatsapp";
 
-/* ═══════════════════════════════════════════════════════════
-   MOBILE BOTTOM NAV — Liquid Glass with WhatsApp Logo
-   ═══════════════════════════════════════════════════════════ */
-
 interface NavItem {
   label: string;
-  icon: React.ElementType | "whatsapp"; // Special "whatsapp" for real logo
-  type: "scroll-top" | "link" | "scroll-anchor" | "whatsapp" | "custom-whatsapp";
+  icon: React.ElementType | "whatsapp";
+  type: "scroll-top" | "link" | "scroll-anchor" | "whatsapp";
   href?: string;
   anchor?: string;
 }
 
+/* ── 5 nav items: Home | Shop | Policies | Story | Chat ── */
 const NAV_ITEMS: NavItem[] = [
   {
     label: "Home",
@@ -38,9 +35,10 @@ const NAV_ITEMS: NavItem[] = [
     href: "/collections",
   },
   {
-    label: "Custom",
-    icon: Sparkles,
-    type: "custom-whatsapp",
+    label: "Policies",
+    icon: FileText,
+    type: "link",
+    href: "/policies",
   },
   {
     label: "Story",
@@ -51,12 +49,11 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Chat",
-    icon: "whatsapp", // Special flag for WhatsApp logo
+    icon: "whatsapp",
     type: "whatsapp",
   },
 ];
 
-/* ─── WhatsApp Logo SVG Component ─── */
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg
     className={className}
@@ -79,6 +76,8 @@ export default function MobileBottomNav() {
   useEffect(() => {
     if (pathname === "/collections") {
       setActiveLabel("Shop");
+    } else if (pathname === "/policies") {
+      setActiveLabel("Policies");
     } else {
       setActiveLabel("Home");
     }
@@ -137,8 +136,6 @@ export default function MobileBottomNav() {
   const handleItemClick = (item: NavItem) => {
     if (item.type === "whatsapp") {
       trackWhatsAppClick("floating_button", "bottom_nav_chat");
-    } else if (item.type === "custom-whatsapp") {
-      trackWhatsAppClick("floating_button", "bottom_nav_custom");
     } else {
       setActiveLabel(item.label);
     }
@@ -160,13 +157,11 @@ export default function MobileBottomNav() {
           aria-label="Mobile navigation"
           role="navigation"
         >
-          {/* Backdrop fade */}
           <div
             aria-hidden="true"
             className="absolute inset-x-0 -top-16 h-16 bg-gradient-to-t from-cream/60 to-transparent pointer-events-none"
           />
 
-          {/* Nav container with liquid glass */}
           <div className="relative px-4 pb-4 pt-2">
             <div
               className="
@@ -186,11 +181,9 @@ export default function MobileBottomNav() {
             >
               {NAV_ITEMS.map((item) => {
                 const isActive = activeLabel === item.label;
-                const isWhatsApp =
-                  item.type === "whatsapp" || item.type === "custom-whatsapp";
                 const isChatButton = item.label === "Chat";
 
-                /* ── Chat WhatsApp Item — Special styling with real WhatsApp logo ── */
+                /* ── Chat WhatsApp Item ── */
                 if (isChatButton) {
                   return (
                     <a
@@ -199,61 +192,16 @@ export default function MobileBottomNav() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleItemClick(item)}
-                      className="
-                        relative flex flex-col items-center justify-center
-                        min-w-[56px] min-h-[56px]
-                        px-3 py-2 rounded-full
-                        transition-all duration-300
-                        active:scale-95
-                        focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest
-                        text-[#25D366] hover:text-[#20BA5A]
-                      "
+                      className="relative flex flex-col items-center justify-center min-w-[56px] min-h-[56px] px-3 py-2 rounded-full transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest text-[#25D366] hover:text-[#20BA5A]"
                       aria-label={item.label}
                     >
-                      {/* WhatsApp logo with subtle glow */}
                       <div className="relative">
-                        {/* Subtle glow behind */}
                         <span
                           className="absolute inset-0 rounded-full bg-[#25D366]/30 blur-md animate-pulse-slow"
                           aria-hidden="true"
                         />
                         <WhatsAppIcon className="relative z-10 w-5 h-5" />
                       </div>
-                      <span className="text-[9px] font-body font-semibold tracking-wider uppercase mt-1 relative z-10">
-                        {item.label}
-                      </span>
-                    </a>
-                  );
-                }
-
-                /* ── Custom WhatsApp Item — Same style as other nav items ── */
-                if (isWhatsApp) {
-                  const Icon = item.icon as React.ElementType;
-                  return (
-                    <a
-                      key={item.label}
-                      href={buildWhatsAppLink({
-                        type: item.type === "custom-whatsapp" ? "custom" : "general",
-                      })}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleItemClick(item)}
-                      className="
-                        relative flex flex-col items-center justify-center
-                        min-w-[56px] min-h-[56px]
-                        px-3 py-2 rounded-full
-                        transition-colors duration-300
-                        active:scale-95
-                        focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest
-                        text-cream/70 hover:text-cream
-                      "
-                      aria-label={item.label}
-                    >
-                      <Icon
-                        className="w-5 h-5 relative z-10"
-                        aria-hidden="true"
-                        strokeWidth={2}
-                      />
                       <span className="text-[9px] font-body font-semibold tracking-wider uppercase mt-1 relative z-10">
                         {item.label}
                       </span>
@@ -269,19 +217,9 @@ export default function MobileBottomNav() {
                       key={item.label}
                       href={item.href!}
                       onClick={handleHomeClick}
-                      className={`
-                        relative flex flex-col items-center justify-center
-                        min-w-[56px] min-h-[56px]
-                        px-3 py-2 rounded-full
-                        transition-colors duration-300
-                        active:scale-95
-                        focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest
-                        ${
-                          isActive
-                            ? "text-cream"
-                            : "text-cream/70 hover:text-cream"
-                        }
-                      `}
+                      className={`relative flex flex-col items-center justify-center min-w-[56px] min-h-[56px] px-3 py-2 rounded-full transition-colors duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest ${
+                        isActive ? "text-cream" : "text-cream/70 hover:text-cream"
+                      }`}
                       aria-label={item.label}
                       aria-current={isActive ? "page" : undefined}
                     >
@@ -309,7 +247,7 @@ export default function MobileBottomNav() {
                   );
                 }
 
-                /* ── Story Button ── */
+                /* ── Story Anchor Button ── */
                 if (item.type === "scroll-anchor") {
                   const Icon = item.icon as React.ElementType;
                   return (
@@ -317,19 +255,9 @@ export default function MobileBottomNav() {
                       key={item.label}
                       href={`${item.href}#${item.anchor}`}
                       onClick={handleStoryClick}
-                      className={`
-                        relative flex flex-col items-center justify-center
-                        min-w-[56px] min-h-[56px]
-                        px-3 py-2 rounded-full
-                        transition-colors duration-300
-                        active:scale-95
-                        focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest
-                        ${
-                          isActive
-                            ? "text-cream"
-                            : "text-cream/70 hover:text-cream"
-                        }
-                      `}
+                      className={`relative flex flex-col items-center justify-center min-w-[56px] min-h-[56px] px-3 py-2 rounded-full transition-colors duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest ${
+                        isActive ? "text-cream" : "text-cream/70 hover:text-cream"
+                      }`}
                       aria-label={item.label}
                       aria-current={isActive ? "page" : undefined}
                     >
@@ -357,26 +285,16 @@ export default function MobileBottomNav() {
                   );
                 }
 
-                /* ── Shop Link ── */
+                /* ── Regular Link (Shop, Policies) ── */
                 const Icon = item.icon as React.ElementType;
                 return (
                   <Link
                     key={item.label}
                     href={item.href!}
                     onClick={() => handleItemClick(item)}
-                    className={`
-                      relative flex flex-col items-center justify-center
-                      min-w-[56px] min-h-[56px]
-                      px-3 py-2 rounded-full
-                      transition-colors duration-300
-                      active:scale-95
-                      focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest
-                      ${
-                        isActive
-                          ? "text-cream"
-                          : "text-cream/70 hover:text-cream"
-                      }
-                    `}
+                    className={`relative flex flex-col items-center justify-center min-w-[56px] min-h-[56px] px-3 py-2 rounded-full transition-colors duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-forest ${
+                      isActive ? "text-cream" : "text-cream/70 hover:text-cream"
+                    }`}
                     aria-label={item.label}
                     aria-current={isActive ? "page" : undefined}
                   >

@@ -12,9 +12,9 @@ const NAV_LINKS = [
   { label: "Collections", href: "/collections" },
   { label: "The Story", href: "/#story" },
   { label: "Reviews", href: "/#reviews" },
+  { label: "Policies", href: "/policies" },
 ];
 
-/* ─── WhatsApp Logo SVG Component ─── */
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg
     className={className}
@@ -127,16 +127,9 @@ export default function Navbar() {
           <div className="flex items-center justify-between gap-4">
             {/* LEFT */}
             <div className="flex items-center flex-1">
-              {/* Mobile Hamburger */}
               <button
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                className="
-                  lg:hidden 
-                  p-2 -ml-2
-                  text-forest hover:text-sage 
-                  transition-colors duration-200
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 rounded
-                "
+                className="lg:hidden p-2 -ml-2 text-forest hover:text-sage transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 rounded"
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu-drawer"
@@ -148,26 +141,13 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Desktop Nav Links (left group) */}
-              <nav
-                className="hidden lg:flex items-center gap-10"
-                aria-label="Main navigation"
-              >
+              {/* Desktop Nav Links (left group — 2 links) */}
+              <nav className="hidden lg:flex items-center gap-8 xl:gap-10" aria-label="Main navigation">
                 {NAV_LINKS.slice(0, 2).map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="
-                      relative py-1
-                      text-[11px] font-body font-medium 
-                      tracking-[0.22em] uppercase 
-                      text-forest hover:text-sage 
-                      transition-colors duration-200
-                      after:content-[''] after:absolute after:bottom-0 
-                      after:left-0 after:w-0 after:h-px 
-                      after:bg-sage hover:after:w-full 
-                      after:transition-all after:duration-300
-                    "
+                    className="relative py-1 text-[11px] font-body font-medium tracking-[0.22em] uppercase text-forest hover:text-sage transition-colors duration-200 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-sage hover:after:w-full after:transition-all after:duration-300"
                   >
                     {link.label}
                   </Link>
@@ -178,14 +158,10 @@ export default function Navbar() {
             {/* CENTER — Logo */}
             <Link
               href="/"
-              className="
-                flex flex-col items-center group shrink-0
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 rounded
-              "
+              className="flex flex-col items-center group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 rounded"
               aria-label="rikriti — Go to homepage"
               onClick={closeMobileMenu}
             >
-              {/* Mobile: Circle Logo */}
               <div className="lg:hidden w-11 h-11 relative">
                 <Image
                   src="/images/rikriti-logo-circle.png"
@@ -197,7 +173,6 @@ export default function Navbar() {
                 />
               </div>
 
-              {/* Desktop: Text Logo */}
               <div className="hidden lg:flex flex-col items-center">
                 <span className="font-brand text-4xl xl:text-[42px] text-forest group-hover:text-sage transition-colors duration-300 tracking-wide leading-none">
                   rikriti
@@ -209,54 +184,27 @@ export default function Navbar() {
             </Link>
 
             {/* RIGHT */}
-            <div className="flex items-center justify-end gap-6 lg:gap-10 flex-1">
-              {/* Desktop Nav Links (right group) */}
-              <nav
-                className="hidden lg:flex items-center gap-10"
-                aria-label="Additional navigation"
-              >
+            <div className="flex items-center justify-end gap-6 lg:gap-8 xl:gap-10 flex-1">
+              {/* Desktop Nav Links (right group — Reviews + Policies) */}
+              <nav className="hidden lg:flex items-center gap-8 xl:gap-10" aria-label="Additional navigation">
                 {NAV_LINKS.slice(2).map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="
-                      relative py-1
-                      text-[11px] font-body font-medium 
-                      tracking-[0.22em] uppercase 
-                      text-forest hover:text-sage 
-                      transition-colors duration-200
-                      after:content-[''] after:absolute after:bottom-0 
-                      after:left-0 after:w-0 after:h-px 
-                      after:bg-sage hover:after:w-full 
-                      after:transition-all after:duration-300
-                    "
+                    className="relative py-1 text-[11px] font-body font-medium tracking-[0.22em] uppercase text-forest hover:text-sage transition-colors duration-200 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-sage hover:after:w-full after:transition-all after:duration-300"
                   >
                     {link.label}
                   </Link>
                 ))}
               </nav>
 
-              {/* WhatsApp CTA — Now with real WhatsApp logo */}
+              {/* WhatsApp CTA */}
               <a
                 href={buildWhatsAppLink({ type: "general" })}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleWhatsAppClick}
-                className="
-                  flex items-center gap-2
-                  bg-[#25D366] hover:bg-[#20BA5A]
-                  text-white
-                  px-4 py-2.5 lg:px-5 lg:py-3
-                  rounded-full
-                  text-[10px] lg:text-[11px] 
-                  font-body font-semibold 
-                  tracking-[0.15em] uppercase
-                  transition-all duration-300
-                  shadow-sm hover:shadow-md
-                  hover:scale-[1.02] active:scale-[0.98]
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2
-                  min-h-[44px]
-                "
+                className="flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white px-4 py-2.5 lg:px-5 lg:py-3 rounded-full text-[10px] lg:text-[11px] font-body font-semibold tracking-[0.15em] uppercase transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 min-h-[44px]"
                 aria-label="Order via WhatsApp"
               >
                 <WhatsAppIcon className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
@@ -294,18 +242,9 @@ export default function Navbar() {
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
               style={{ transformOrigin: "top" }}
-              className="
-                lg:hidden 
-                fixed top-0 left-0 right-0 z-50
-                bg-cream border-b border-taupe/30
-                pt-24 pb-8 px-6
-                shadow-lg
-              "
+              className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-cream border-b border-taupe/30 pt-24 pb-8 px-6 shadow-lg"
             >
-              <nav
-                className="flex flex-col items-center gap-6"
-                aria-label="Mobile navigation"
-              >
+              <nav className="flex flex-col items-center gap-5" aria-label="Mobile navigation">
                 {NAV_LINKS.map((link, index) => (
                   <motion.div
                     key={link.href}
@@ -317,25 +256,17 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMobileMenu}
-                      className="
-                        block py-3
-                        text-sm font-body font-medium 
-                        uppercase tracking-[0.25em] 
-                        text-forest hover:text-sage 
-                        transition-colors duration-200
-                        min-h-[48px] flex items-center justify-center
-                      "
+                      className="block py-3 text-sm font-body font-medium uppercase tracking-[0.25em] text-forest hover:text-sage transition-colors duration-200 min-h-[48px] flex items-center justify-center"
                     >
                       {link.label}
                     </Link>
                   </motion.div>
                 ))}
 
-                {/* Mobile drawer WhatsApp CTA */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.4 }}
                   className="w-full max-w-xs mt-4"
                 >
                   <a
@@ -346,17 +277,7 @@ export default function Navbar() {
                       handleWhatsAppClick();
                       closeMobileMenu();
                     }}
-                    className="
-                      flex items-center justify-center gap-2
-                      w-full
-                      bg-[#25D366] hover:bg-[#20BA5A]
-                      text-white
-                      px-6 py-4 rounded-full
-                      text-xs font-body font-semibold 
-                      tracking-widest uppercase
-                      transition-all duration-300
-                      shadow-sm min-h-[48px]
-                    "
+                    className="flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#20BA5A] text-white px-6 py-4 rounded-full text-xs font-body font-semibold tracking-widest uppercase transition-all duration-300 shadow-sm min-h-[48px]"
                   >
                     <WhatsAppIcon className="w-4 h-4" />
                     Order via WhatsApp
