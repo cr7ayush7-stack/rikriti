@@ -221,9 +221,9 @@ export default function Footer() {
                   <span>WhatsApp</span>
                 </a>
               </li>
-              <li>
+                            <li>
                 <a
-                  href="https://instagram.com/rikriti"
+                  href="https://instagram.com/ri_kriti"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-body text-forest/75 hover:text-forest hover:gap-3 transition-all duration-300 group"

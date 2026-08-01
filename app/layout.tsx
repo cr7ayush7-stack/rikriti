@@ -28,7 +28,7 @@ const SITE_CONFIG = {
     countryCode: "IN",
   },
   whatsapp: "919XXXXXXXXX", // ⚠️ Add real WhatsApp number (with country code, no +)
-  instagram: "@rikriti", // ⚠️ Add real Instagram handle
+    instagram: "@ri_kriti", // ⚠️ Add real Instagram handle
   email: "hello@rikriti.in", // ⚠️ Add real email if available
 };
 

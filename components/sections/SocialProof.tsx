@@ -431,10 +431,10 @@ export default function SocialProof() {
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-center max-w-2xl mx-auto mb-12 lg:mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-6">
+                    <div className="flex items-center justify-center gap-3 mb-6">
             <Camera className="w-4 h-4 text-sage" aria-hidden="true" />
             <span className="text-xs font-body font-semibold tracking-[0.25em] uppercase text-sage">
-              Follow @rikriti
+              Follow @ri_kriti
             </span>
           </div>
 
@@ -585,15 +585,15 @@ export default function SocialProof() {
           <p className="font-body text-sm text-forest/60 mb-4">
             Share your rikriti moment
           </p>
-          <a
-            href="https://instagram.com/rikriti"
+                    <a
+            href="https://instagram.com/ri_kriti"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-forest text-cream px-6 py-3 rounded-full text-xs font-body font-semibold tracking-[0.15em] uppercase hover:bg-sage hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2"
             aria-label="Follow rikriti on Instagram"
           >
             <Camera className="w-4 h-4" aria-hidden="true" />
-            @rikriti on Instagram
+            @ri_kriti on Instagram
             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </a>
         </motion.div>

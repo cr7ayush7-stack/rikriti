@@ -3,29 +3,8 @@
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { Sparkles, Heart, ArrowUpRight, Play, Pause, Volume2, VolumeX, Feather, Home, Clock } from "lucide-react";
+import { Sparkles, Heart, ArrowUpRight, Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { buildWhatsAppLink, trackWhatsAppClick } from "@/lib/whatsapp";
-
-const VALUES = [
-  {
-    icon: Feather,
-    label: "Handmade",
-    subtitle: "Every loop by hand",
-    description: "No factories. No shortcuts. Every stitch made in Mulund, Mumbai.",
-  },
-  {
-    icon: Home,
-    label: "Remote Studio",
-    subtitle: "A small home studio",
-    description: "Just richa and a few artisans, working with intention every day.",
-  },
-  {
-    icon: Clock,
-    label: "Timeless",
-    subtitle: "Blooms that last forever",
-    description: "Crochet never wilts. Your gift stays beautiful, year after year.",
-  },
-];
 
 export default function Story() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -128,7 +107,7 @@ export default function Story() {
           >
             <Sparkles className="w-3.5 h-3.5 text-sage" aria-hidden="true" />
             <span className="text-xs font-body font-semibold tracking-[0.25em] uppercase text-sage">
-               The Making
+              The Making
             </span>
             <Sparkles className="w-3.5 h-3.5 text-sage" aria-hidden="true" />
           </motion.div>
@@ -160,7 +139,7 @@ export default function Story() {
             DESKTOP: VIDEO CENTER + FLOATING PHOTOS WITH TAPE
             ═══════════════════════════════════════════════════ */}
         <div className="hidden lg:block relative max-w-5xl mx-auto mb-16">
-          {/* Photo 1 — Top Left (LANDSCAPE — BIGGER, adjusted tilt) */}
+          {/* Photo 1 — Top Left */}
           <motion.div
             initial={{ opacity: 0, x: -50, rotate: -10 }}
             whileInView={{ opacity: 1, x: 0, rotate: -8 }}
@@ -168,10 +147,9 @@ export default function Story() {
             transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="absolute top-4 -left-8 xl:-left-16 z-20 w-72 xl:w-80 aspect-[4/3]"
           >
-            {/* TORN PAPER TAPE — Top edge */}
             <div
               className="absolute -top-4 left-1/2 -translate-x-1/2 w-36 h-6 z-30 pointer-events-none"
-              style={{ transform: "translateX(-50%) rotate(-15deg)" }}
+              style={{ transform: "translateX(-50%) rotate(-6deg)" }}
               aria-hidden="true"
             >
               <Image
@@ -206,7 +184,7 @@ export default function Story() {
             </div>
           </motion.div>
 
-          {/* Photo 2 — Top Right (PORTRAIT — kept smaller) */}
+          {/* Photo 2 — Top Right */}
           <motion.div
             initial={{ opacity: 0, x: 50, rotate: 8 }}
             whileInView={{ opacity: 1, x: 0, rotate: 6 }}
@@ -214,10 +192,9 @@ export default function Story() {
             transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="absolute top-4 -right-4 xl:-right-8 z-20 w-48 xl:w-52 aspect-[3/4]"
           >
-            {/* TORN PAPER TAPE — Top edge */}
             <div
               className="absolute -top-4 left-1/2 -translate-x-1/2 w-28 h-6 z-30 pointer-events-none"
-              style={{ transform: "translateX(-50%) rotate(-70deg)" }}
+              style={{ transform: "translateX(-50%) rotate(3deg)" }}
               aria-hidden="true"
             >
               <Image
@@ -252,7 +229,7 @@ export default function Story() {
             </div>
           </motion.div>
 
-          {/* Photo 3 — Bottom Left (LANDSCAPE) */}
+          {/* Photo 3 — Bottom Left */}
           <motion.div
             initial={{ opacity: 0, x: -50, rotate: 5 }}
             whileInView={{ opacity: 1, x: 0, rotate: 4 }}
@@ -260,10 +237,9 @@ export default function Story() {
             transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="absolute bottom-4 -left-2 xl:-left-4 z-20 w-52 xl:w-56 aspect-[4/3]"
           >
-            {/* TORN PAPER TAPE — Top edge */}
             <div
               className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-6 z-30 pointer-events-none"
-              style={{ transform: "translateX(-50%) rotate(-40deg)" }}
+              style={{ transform: "translateX(-50%) rotate(2deg)" }}
               aria-hidden="true"
             >
               <Image
@@ -425,11 +401,10 @@ export default function Story() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid grid-cols-3 gap-3 sm:gap-4 pt-6"
           >
-            {/* Mobile Photo 1 with tape */}
             <div className="relative">
               <div
                 className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 z-30 pointer-events-none"
-                style={{ transform: "translateX(-50%) rotate(-30deg)" }}
+                style={{ transform: "translateX(-50%) rotate(-5deg)" }}
                 aria-hidden="true"
               >
                 <Image
@@ -451,11 +426,10 @@ export default function Story() {
               </div>
             </div>
 
-            {/* Mobile Photo 2 with tape */}
             <div className="relative">
               <div
                 className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 z-30 pointer-events-none"
-                style={{ transform: "translateX(-50%) rotate(-40deg)" }}
+                style={{ transform: "translateX(-50%) rotate(3deg)" }}
                 aria-hidden="true"
               >
                 <Image
@@ -477,11 +451,10 @@ export default function Story() {
               </div>
             </div>
 
-            {/* Mobile Photo 3 with tape */}
             <div className="relative">
               <div
                 className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 z-30 pointer-events-none"
-                style={{ transform: "translateX(-50%) rotate(-70deg)" }}
+                style={{ transform: "translateX(-50%) rotate(-2deg)" }}
                 aria-hidden="true"
               >
                 <Image
@@ -492,7 +465,7 @@ export default function Story() {
                   className="w-full h-full object-cover opacity-95"
                 />
               </div>
-              <div className="relative aspect-square rounded-lg overflow-hidden shadow-md transform rotate-[3deg] hover:rotate-0 transition-transform duration-500">
+              <div className="relative aspect-square rounded-lg overflow-hidden shadow-md transform rotate-[2deg] hover:rotate-0 transition-transform duration-500">
                 <Image
                   src="/images/workshop-artisans-group.jpg"
                   alt="Workshop artisans"
@@ -519,69 +492,6 @@ export default function Story() {
         </motion.p>
 
         {/* ═══════════════════════════════════════════════════
-            THREE VALUES
-            ═══════════════════════════════════════════════════ */}
-        <div className="mb-16 lg:mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-10 lg:mb-14"
-          >
-            <span className="text-[11px] font-body font-semibold tracking-[0.3em] uppercase text-sage">
-              Three Values · One Craft
-            </span>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
-            {VALUES.map((value, index) => {
-              const Icon = value.icon;
-
-              return (
-                <motion.div
-                  key={value.label}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{
-                    duration: 0.6,
-                    delay: index * 0.15,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
-                  className="group relative bg-ivory border border-taupe/40 rounded-2xl p-6 sm:p-7 lg:p-8 hover:shadow-lg hover:border-sage/40 transition-all duration-500"
-                >
-                  <div className="flex items-start justify-between mb-5">
-                    <span className="font-display italic text-3xl sm:text-4xl text-sage/70">
-                      0{index + 1}
-                    </span>
-                    <div className="w-11 h-11 rounded-full bg-sage/10 flex items-center justify-center group-hover:bg-sage/20 group-hover:rotate-12 transition-all duration-500">
-                      <Icon
-                        className="w-5 h-5 text-sage"
-                        aria-hidden="true"
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  </div>
-
-                  <h3 className="font-display text-2xl lg:text-3xl text-forest leading-tight mb-2">
-                    {value.label}
-                  </h3>
-
-                  <p className="text-xs font-body font-semibold tracking-[0.2em] uppercase text-sage mb-3">
-                    {value.subtitle}
-                  </p>
-
-                  <p className="font-body text-sm text-forest/70 leading-relaxed">
-                    {value.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ═══════════════════════════════════════════════════
             SIGNATURE CLOSING WITH FLOWER ACCENT
             ═══════════════════════════════════════════════════ */}
         <motion.div
@@ -591,7 +501,6 @@ export default function Story() {
           transition={{ duration: 0.8 }}
           className="relative text-center max-w-2xl mx-auto"
         >
-          {/* Small flower accent — top of signature */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5, rotate: 15 }}
             whileInView={{ opacity: 0.85, scale: 1, rotate: 8 }}
