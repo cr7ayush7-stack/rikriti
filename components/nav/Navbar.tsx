@@ -155,24 +155,24 @@ export default function Navbar() {
               </nav>
             </div>
 
-            {/* CENTER — Logo */}
+                        {/* CENTER — Logo */}
             <Link
               href="/"
               className="flex flex-col items-center group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 rounded"
               aria-label="rikriti — Go to homepage"
               onClick={closeMobileMenu}
             >
-              <div className="lg:hidden w-11 h-11 relative">
-                <Image
-                  src="/images/rikriti-logo-circle.png"
-                  alt="rikriti"
-                  fill
-                  priority
-                  sizes="44px"
-                  className="object-contain"
-                />
+              {/* Mobile: Text logo (cleaner + readable) */}
+              <div className="lg:hidden flex flex-col items-center">
+                <span className="font-brand text-2xl text-forest group-hover:text-sage transition-colors duration-300 tracking-wide leading-none">
+                  rikriti
+                </span>
+                <span className="text-[8px] font-body tracking-[0.3em] uppercase text-sage/70 mt-1">
+                  Indo Western Crochet
+                </span>
               </div>
 
+              {/* Desktop: Larger text logo */}
               <div className="hidden lg:flex flex-col items-center">
                 <span className="font-brand text-4xl xl:text-[42px] text-forest group-hover:text-sage transition-colors duration-300 tracking-wide leading-none">
                   rikriti
